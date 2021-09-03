@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./redux/store";
+import {
+  incrementValue,
+  maxValue,
+  resetCounter,
+  setButton,
+  startValue,
+} from "./redux/CountReducer";
+import {Counter} from "./counter/Counter";
+import {Settings} from "./settings/Settings";
+
 
 function App() {
+
+  const dispatch = useDispatch()
+  const changeHandlerStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const currentTarget = e.currentTarget.valueAsNumber;
+      dispatch(startValue(currentTarget))
+  }
+  const changeHandlerMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const currentTarget = e.currentTarget.valueAsNumber;
+    dispatch((maxValue(currentTarget)))
+  }
+  const setNewCounterValue = () => {
+    dispatch(setButton())
+  }
+  const setResetValue = () => {
+    dispatch(resetCounter())
+  }
+  const incCounterValue = () => {
+    dispatch(incrementValue())
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={'App'}>
+      <Settings
+        changeHandlerStartValue={changeHandlerStartValue}
+        changeHandlerMaxValue={changeHandlerMaxValue}
+        setNewCounterValue={setNewCounterValue}
+      />
+      <Counter
+        setResetValue={setResetValue}
+        incCounterValue={incCounterValue}
+      />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+
