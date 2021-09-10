@@ -1,53 +1,16 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "./redux/store";
-import {
-  incrementValue,
-  maxValue,
-  resetCounter,
-  setButton,
-  startValue,
-} from "./redux/CountReducer";
-import {Counter} from "./counter/Counter";
-import {Settings} from "./settings/Settings";
+import {CounterSettings} from "./components/counterSettings/CounterSettings";
+import {Counter} from "./components/counter/Counter";
 
-
-function App() {
-
-  const dispatch = useDispatch()
-  const changeHandlerStartValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const currentTarget = e.currentTarget.valueAsNumber;
-      dispatch(startValue(currentTarget))
-  }
-  const changeHandlerMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const currentTarget = e.currentTarget.valueAsNumber;
-    dispatch((maxValue(currentTarget)))
-  }
-  const setNewCounterValue = () => {
-    dispatch(setButton())
-  }
-  const setResetValue = () => {
-    dispatch(resetCounter())
-  }
-  const incCounterValue = () => {
-    dispatch(incrementValue())
-  }
-
+export const App = () => {
   return (
-    <div className={'App'}>
-      <Settings
-        changeHandlerStartValue={changeHandlerStartValue}
-        changeHandlerMaxValue={changeHandlerMaxValue}
-        setNewCounterValue={setNewCounterValue}
-      />
-      <Counter
-        setResetValue={setResetValue}
-        incCounterValue={incCounterValue}
-      />
+    <div className="App">
+      <CounterSettings/>
+      <Counter/>
     </div>
-  )
+  );
 }
 
-export default App
 
+export default App;

@@ -1,4 +1,5 @@
-import {AppStateType} from "../redux/store";
+import { AppStateType } from "../redux/store";
+
 
 export const loadState = () => {
   try {
@@ -21,3 +22,5 @@ export const saveState = (state: AppStateType) => {
     // ignore write errors
   }
 };
+
+
